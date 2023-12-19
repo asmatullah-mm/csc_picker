@@ -170,25 +170,27 @@ class _SearchDialogState<T> extends State<SearchDialog> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 16),
-                  child: Text(
-                    widget.title,
-                    style: widget.titleStyle != null
-                        ? widget.titleStyle
-                        : TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            Padding(
+              padding: EdgeInsets.only(left: 0, right: 8, top: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 16),
+                    child: Text(
+                      widget.title,
+                      style: widget.titleStyle != null
+                          ? widget.titleStyle
+                          : TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    ),
                   ),
-                ),
-                IconButton(
-                    icon: Icon(Icons.close),
-                    onPressed: () {
-                      FocusScope.of(context).unfocus();
-                      Navigator.pop(context);
-                    })
-                /*Align(
+                  IconButton(
+                      icon: Icon(Icons.close),
+                      onPressed: () {
+                        FocusScope.of(context).unfocus();
+                        Navigator.pop(context);
+                      })
+                  /*Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
                     onPressed: () {
@@ -202,32 +204,28 @@ class _SearchDialogState<T> extends State<SearchDialog> {
                           : TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                     )),
               )*/
-              ],
+                ],
+              ),
             ),
-            SizedBox(height: 5),
+            SizedBox(height: 0),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 16),
               child: TextField(
                 autofocus: true,
                 decoration: InputDecoration(
                   isDense: true,
-                  prefixIcon: Icon(Icons.search),
                   hintText: widget.placeHolder,
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                        widget.searchInputRadius != null
-                            ? Radius.circular(widget.searchInputRadius!)
-                            : Radius.circular(5)),
+                  focusedBorder: UnderlineInputBorder(
+                    borderRadius: BorderRadius.circular(4),
                     borderSide: const BorderSide(
-                      color: Colors.black26,
+                      color: Color(0xFF078948),
                     ),
                   ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                        widget.searchInputRadius != null
-                            ? Radius.circular(widget.searchInputRadius!)
-                            : Radius.circular(5)),
-                    borderSide: const BorderSide(color: Colors.black12),
+                  enabledBorder: UnderlineInputBorder(
+                    borderRadius: BorderRadius.circular(4),
+                    borderSide: const BorderSide(
+                      color: Colors.black38,
+                    ),
                   ),
                 ),
                 style: widget.itemStyle != null
@@ -236,7 +234,7 @@ class _SearchDialogState<T> extends State<SearchDialog> {
                 controller: textController,
               ),
             ),
-            SizedBox(height: 5),
+            SizedBox(height: 8),
             Expanded(
               child: ClipRRect(
                 borderRadius: BorderRadius.all(widget.dialogRadius != null
@@ -245,6 +243,7 @@ class _SearchDialogState<T> extends State<SearchDialog> {
                 //borderRadius: widget.dialogRadius!=null?BorderRadius.circular(widget.dropDownRadius!):BorderRadius.circular(14),
                 child: ListView.builder(
                     itemCount: filteredList.length,
+                    padding: EdgeInsets.symmetric(vertical: 12),
                     itemBuilder: (context, index) {
                       return InkWell(
                           onTap: () {
@@ -253,7 +252,7 @@ class _SearchDialogState<T> extends State<SearchDialog> {
                           },
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 18),
+                                vertical: 12, horizontal: 18),
                             child: Text(
                               filteredList[index].toString(),
                               style: widget.itemStyle != null
